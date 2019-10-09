@@ -42,7 +42,7 @@
 			]
 		}
 
-2. /list/categories
+2. /categories/list/[category_id]
 	
 	DESCRIPTION: 获取子版块信息
 	
@@ -50,7 +50,7 @@
 	
 	PARAM:
 	
-		id	  [int]	   // 父板块或子版块的id
+		category_id	  [int]	   // 父板块或子版块的id
 	
 	RESPONSE: 
 	
@@ -84,7 +84,7 @@
 			]
 		}
 		
-3. /list/categories
+3. /categories/list/by_news/[news_id]
 	
 	DESCRIPTION: 获取子版块信息
 	
@@ -128,7 +128,7 @@
 			]
 		}
 		
-4. /list/news
+4. /news/list/[category_id]
 
 	DESCRIPTION: 获取新闻列表
 	
@@ -146,6 +146,7 @@
 					"id":			[int]		// 新闻id,
 					"title":        [str]		// 新闻标题,
 					"time":			[int]		// 新闻最后修改的时间戳
+					"highlight":	[bool]		// 是否高亮显示
 				}, ...
 			]
 		}
@@ -157,17 +158,19 @@
 				{
 					"id": 101,
 					"title": "Department of Electrical Science and Engineering",
-					"time": 1569411840964
+					"time": 1569411840964,
+					"highlight": true
 				},
 				{
 					"id": 102,
 					"title": "Teaching Center for Experimental Electronic Information",
-					"time": 1569411840964
+					"time": 1569411840964,
+					"highlight": false
 				},
 			]
 		}
 
-5. /get/news
+5. /news/[news_id]
 
 	DESCRIPTION: 获取新闻
 	
@@ -175,7 +178,7 @@
 	
 	PARAM:
 	
-		id	  [int]	   // 新闻 id
+		news_id	  [int]	   // 新闻 id
 	
 	RESPONSE: 
 	
@@ -183,6 +186,7 @@
 			"id":			[int]		// 新闻id
 			"category_id":	[int]		// 所属板块id
 			"title":		[str]		// 新闻标题
+			"author":		[str]		// 作者名称
 			"time":			[int]		// 新闻最后更改时间戳
 			"content":		[str]		// 新闻文本
 		}
@@ -193,7 +197,223 @@
 			"id": 101,
 			"category_id": 12,
 			"title": "Department of Electrical Science and Engineering",
+			"author": "ACat",
 			"time": 1569411840964,
 			"content": "ABCDEFG..."
 		}
 
+6. /admin/news/[news_id]/top
+
+	DESCRIPTION: 置顶新闻
+	
+	METHOD: GET
+	
+	PARAM:
+	
+		news_id	  [int]	   // 新闻 id
+	
+	RESPONSE: 
+	
+		{
+			"result": 		[bool]		// 操作结果
+			"error_code":	[int]		// 错误码
+			"message":		[str]		// 错误信息
+		}
+
+7. /admin/news/[news_id]/save
+
+	DESCRIPTION: 新建或保存新闻
+	
+	METHOD: POST
+	
+	PARAM:
+		
+		news_id		[int]	// 新闻 id
+		
+		body: {
+			"title":		[str]		// 新闻标题
+			"category_id":	[int]		// 新闻所述子版块id
+			"author":		[str]		// 作者名称
+			"hightlight_time":	[int]	// 高亮时间 (单位: 时)
+			"content":		[str]		// 新闻内容
+		}
+		
+	RESPONSE: 
+	
+		{
+			"result": 		[bool]		// 操作结果
+			"error_code":	[int]		// 错误码
+			"message":		[str]		// 错误信息
+		}
+
+8. /admin/news/[news_id]/publish
+
+	DESCRIPTION: 发布新闻
+	
+	METHOD: GET
+	
+	PARAM:
+	
+		news_id	  [int]	   // 新闻 id
+	
+	RESPONSE: 
+	
+		{
+			"result": 		[bool]		// 操作结果
+			"error_code":	[int]		// 错误码
+			"message":		[str]		// 错误信息
+		}
+	
+9. /admin/news/[news_id]/delete
+
+	DESCRIPTION: 删除新闻
+    	
+	METHOD: GET
+	
+	PARAM:
+	
+		news_id	  [int]	   // 新闻 id
+	
+	RESPONSE: 
+	
+		{
+			"result": 		[bool]		// 操作结果
+			"error_code":	[int]		// 错误码
+			"message":		[str]		// 错误信息
+		}
+	
+10. /admin/news/[news_id]/remove
+
+	DESCRIPTION: 撤下新闻
+    	
+	METHOD: GET
+	
+	PARAM:
+	
+		news_id	  [int]	   // 新闻 id
+	
+	RESPONSE: 
+	
+		{
+			"result": 		[bool]		// 操作结果
+			"error_code":	[int]		// 错误码
+			"message":		[str]		// 错误信息
+		}
+
+11. /admin/news/[news_id]
+
+	DESCRIPTION: 获取新闻
+    	
+	METHOD: GET
+	
+	PARAM:
+	
+		news_id	  [int]	   // 新闻 id
+	
+	RESPONSE: 
+	
+		{
+			"id":			[int]		// 新闻id
+			"category_id":	[int]		// 所属板块id
+			"title":		[str]		// 新闻标题
+			"author":		[str]		// 作者名称
+			"highlight_time":	[int]	// 高亮剩余时间 (单位: 时)
+			"content":		[str]		// 新闻文本
+		}
+		
+	RESP_DEMO:
+	
+		{
+			"result": true,
+			"id": 101,
+			"category_id": 12,
+			"title": "Department of Electrical Science and Engineering",
+			"author": "ACat",
+			"highlight_time": 10,
+			"content": "ABCDEFG..."
+		}
+
+12. /admin/news/list/[category_id]
+    	
+	DESCRIPTION: 获取新闻列表
+    	
+	METHOD: GET
+	
+	PARAM:
+	
+		category_id	  [int]	   // 父板块或子版块的id
+	
+	RESPONSE: 
+	
+		{
+			"result": 		[bool]		// 操作结果
+			"error_code":	[int]		// 错误码
+			"message":		[str]		// 错误信息
+			"data": [
+				{
+					"id":			[int]		// 新闻id,
+					"title":        [str]		// 新闻标题,
+					"time":			[int]		// 新闻最后修改的时间戳
+					"status":		[int]		// 新闻状态. 0 - 待发布, 1 - 已发布, 2 - 已撤回
+				}, ...
+			]
+		}
+		
+	RESP_DEMO:
+	
+		{
+			"result": true,
+			"error_code": 0,
+			"message":	null,
+			"data": [
+				{
+					"id": 101,
+					"title": "Department of Electrical Science and Engineering",
+					"time": 1569411840964,
+					"status": 1
+				},
+				{
+					"id": 102,
+					"title": "Teaching Center for Experimental Electronic Information",
+					"time": 1569411840964,
+					"status": 2
+				},
+			]
+		}
+		
+13. /admin/login
+
+	DESCRIPTION: 用户登录验证
+        	
+	METHOD: POST
+	
+	PARAM:
+	
+		username	[str]		// 用户名
+		password	[str]		// 密码
+	
+	RESPONSE: 
+	
+		{
+			"result": 		[bool]		// 操作结果
+			"error_code":	[int]		// 错误码
+			"message":		[str]		// 错误信息
+		}
+
+14. /admin/password/modify
+	
+	DESCRIPTION: 修改密码
+        	
+	METHOD: POST
+	
+	PARAM:
+
+		password	[str]		// 密码
+	
+	RESPONSE: 
+	
+		{
+			"result": 		[bool]		// 操作结果
+			"error_code":	[int]		// 错误码
+			"message":		[str]		// 错误信息
+		}
