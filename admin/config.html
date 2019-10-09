@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Xenon Boostrap Admin Panel" />
+    <meta name="author" content="" />
+
+    <title>Profile Filler - 用户资料管理</title>
+
+    <link rel="stylesheet" href="../css/fonts/arimo/css/arimo.css">
+    <link rel="stylesheet" href="../css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="../css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/xenon-core.css">
+    <link rel="stylesheet" href="../css/xenon-forms.css">
+    <link rel="stylesheet" href="../css/xenon-components.css">
+    <link rel="stylesheet" href="../css/xenon-skins.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../js/datatables/dataTables.bootstrap.css">
+
+    <script src="../js/jquery-1.11.1.min.js"></script>
+
+    <style>
+        tbody tr td:last-child {
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body class="page-body">
+
+    <div class="page-container">
+
+        <div class="main-content">
+
+            <div class="page-title">
+
+                <div class="title-env">
+                    <h1 class="title">Profile Filler</h1>
+                    <p class="description">用户资料管理</p>
+                </div>
+
+            </div>
+
+
+            <!-- Custom column filtering -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="line-height:47px;">用户资料列表</h3>
+                    <div class="panel-options">
+                        <button class="btn btn-secondary btn-icon btn-icon-standalone" id="open-modal-new">
+                            <i class="fa-plus"></i><span>新的用户资料</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <table id="profile-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Language</th>
+                                <th>Country</th>
+                                <th>City</th>
+                                <th>Postal Code</th>
+                                <th>Phone Number</th>
+                                <th width="180px">Operation</th>
+                            </tr>
+                        </thead>
+
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Language</th>
+                                <th>Country</th>
+                                <th>City</th>
+                                <th>Postal Code</th>
+                                <th>Phone Number</th>
+                                <th>Operation</th>
+                            </tr>
+                        </tfoot>
+
+                        <tbody id="profile-table-tbody">
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <footer class="main-footer sticky footer-type-1">
+
+                <div class="footer-inner">
+
+                    <div class="footer-text">
+                        <strong>Profile Filler</strong>
+                        由
+                        <strong>阿猫_ACat (sun.arcate@icloud.com)</strong> 制作
+                    </div>
+
+                    <div class="go-up">
+                        <a href="#" rel="go-top">
+                            <i class="fa-angle-up"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+            </footer>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-info">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modal-info-title"></h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- 姓名 -->
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="first-name" class="control-label">First Name</label>
+
+                                <input type="text" class="form-control" id="first-name" placeholder="First Name">
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="last-name" class="control-label">First Name</label>
+
+                                <input type="text" class="form-control" id="last-name" placeholder="Last Name">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 语言和国家 -->
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="language" class="control-label">Language</label>
+                                <select class="form-control" id="language">
+                                    <option value="id_ID" disabled>Bahasa Indonesia - Indonesian</option>
+                                    <option value="ms_MY" disabled>Bahasa Melayu - Malay</option>
+                                    <option value="ca_ES" disabled>Català - Catalan</option>
+                                    <option value="cs_CZ" disabled>Čeština - Czech</option>
+                                    <option value="da_DK" disabled>Dansk - Danish</option>
+                                    <option value="de_DE" disabled>Deutsch - German</option>
+                                    <option value="en_GB" disabled>English (UK) - English (UK)</option>
+                                    <option value="en_US" selected>English (US) - English (US)</option>
+                                    <option value="es_ES" disabled>Español - Spanish</option>
+                                    <option value="es_MX" disabled>Español (Latinoamérica) - Spanish (Latin America)</option>
+                                    <option value="fr_FR" disabled>Français - French</option>
+                                    <option value="fr_CA" disabled>Français (Canada) - French (Canada)</option>
+                                    <option value="hr_HR" disabled>Hrvatski - Croatian</option>
+                                    <option value="it_IT" disabled>Italiano - Italian</option>
+                                    <option value="hu_HU" disabled>Magyar - Hungarian</option>
+                                    <option value="nl_NL" disabled>Nederlands - Dutch</option>
+                                    <option value="no_NO" disabled>Norsk - Norwegian</option>
+                                    <option value="pl_PL" disabled>Polski - Polish</option>
+                                    <option value="pt_BR" disabled>Português (Brasil) - Portuguese (Brazil)</option>
+                                    <option value="pt_PT" disabled>Português (Portugal) - Portuguese (Portugal)</option>
+                                    <option value="ro_RO" disabled>Română - Romanian</option>
+                                    <option value="sk_SK" disabled>Slovenčina - Slovak</option>
+                                    <option value="fi_FI" disabled>Suomi - Finnish</option>
+                                    <option value="sv_SE" disabled>Svenska - Swedish</option>
+                                    <option value="vi_VN" disabled>Tiếng Việt - Vietnamese</option>
+                                    <option value="tr_TR" disabled>Türkçe - Turkish</option>
+                                    <option value="el_GR" disabled>Ελληνικά - Greek</option>
+                                    <option value="ru_RU" disabled>Русский - Russian</option>
+                                    <option value="uk_UA" disabled>Українська - Ukrainian</option>
+                                    <option value="iw_IL" disabled>עברית - Hebrew</option>
+                                    <option value="ar_SA" disabled>العربيه - Arabic</option>
+                                    <option value="hi_IN" disabled>हिन्दी - Hindi</option>
+                                    <option value="th_TH" disabled>ภาษาไทย - Thai</option>
+                                    <option value="ko_KR" disabled>한국어 - Korean</option>
+                                    <option value="ja_JP" disabled>日本語 - Japanese</option>
+                                    <option value="zh_CN" disabled>简体中文 - Chinese (Simplified)</option>
+                                    <option value="zh_HK" disabled>繁體中文 - Chinese (Hong Kong)</option>
+                                    <option value="zh_TW" disabled>繁體中文 - Chinese (Traditional)</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="country" class="control-label">Country</label>
+                                <select class="form-control" id="country">
+                                    <option value="ALB" disabled>Albania</option>
+                                    <option value="DZA" disabled>Algeria</option>
+                                    <option value="AGO" disabled>Angola</option>
+                                    <option value="AIA" disabled>Anguilla</option>
+                                    <option value="ATG" disabled>Antigua And Barbuda</option>
+                                    <option value="ARG" disabled>Argentina</option>
+                                    <option value="ARM" disabled>Armenia</option>
+                                    <option value="AUS" disabled>Australia</option>
+                                    <option value="AUT" disabled>Austria</option>
+                                    <option value="AZE" disabled>Azerbaijan</option>
+                                    <option value="BHS" disabled>Bahamas</option>
+                                    <option value="BHR" disabled>Bahrain</option>
+                                    <option value="BRB" disabled>Barbados</option>
+                                    <option value="BLR" disabled>Belarus</option>
+                                    <option value="BEL" disabled>Belgium</option>
+                                    <option value="BLZ" disabled>Belize</option>
+                                    <option value="BEN" disabled>Benin</option>
+                                    <option value="BMU" disabled>Bermuda</option>
+                                    <option value="BTN" disabled>Bhutan</option>
+                                    <option value="BOL" disabled>Bolivia</option>
+                                    <option value="BWA" disabled>Botswana</option>
+                                    <option value="BRA" disabled>Brazil</option>
+                                    <option value="VGB" disabled>British Virgin Islands</option>
+                                    <option value="BRN" disabled>Brunei Darussalam</option>
+                                    <option value="BGR" disabled>Bulgaria</option>
+                                    <option value="BFA" disabled>Burkina Faso</option>
+                                    <option value="KHM" disabled>Cambodia</option>
+                                    <option value="CAN" disabled>Canada</option>
+                                    <option value="CPV" disabled>Cape Verde</option>
+                                    <option value="CYM" disabled>Cayman Islands</option>
+                                    <option value="TCD" disabled>Chad</option>
+                                    <option value="CHL" disabled>Chile</option>
+                                    <option value="CHN" disabled>China mainland</option>
+                                    <option value="COL" disabled>Colombia</option>
+                                    <option value="CRI" disabled>Costa Rica</option>
+                                    <option value="HRV" disabled>Croatia</option>
+                                    <option value="CYP" disabled>Cyprus</option>
+                                    <option value="CZE" disabled>Czechia</option>
+                                    <option value="DNK" disabled>Denmark</option>
+                                    <option value="DMA" disabled>Dominica</option>
+                                    <option value="DOM" disabled>Dominican Republic</option>
+                                    <option value="ECU" disabled>Ecuador</option>
+                                    <option value="EGY" disabled>Egypt</option>
+                                    <option value="SLV" disabled>El Salvador</option>
+                                    <option value="EST" disabled>Estonia</option>
+                                    <option value="FJI" disabled>Fiji</option>
+                                    <option value="FIN" disabled>Finland</option>
+                                    <option value="FRA" disabled>France</option>
+                                    <option value="GMB" disabled>Gambia</option>
+                                    <option value="DEU" disabled>Germany</option>
+                                    <option value="GHA" disabled>Ghana</option>
+                                    <option value="GRC" disabled>Greece</option>
+                                    <option value="GRD" disabled>Grenada</option>
+                                    <option value="GTM" disabled>Guatemala</option>
+                                    <option value="GNB" disabled>Guinea-Bissau</option>
+                                    <option value="GUY" disabled>Guyana</option>
+                                    <option value="HND" disabled>Honduras</option>
+                                    <option value="HKG" disabled>Hong Kong</option>
+                                    <option value="HUN" disabled>Hungary</option>
+                                    <option value="ISL" disabled>Iceland</option>
+                                    <option value="IND" disabled>India</option>
+                                    <option value="IDN" disabled>Indonesia</option>
+                                    <option value="IRL" disabled>Ireland</option>
+                                    <option value="ISR" disabled>Israel</option>
+                                    <option value="ITA" disabled>Italy</option>
+                                    <option value="JAM" disabled>Jamaica</option>
+                                    <option value="JPN" disabled>Japan</option>
+                                    <option value="JOR" disabled>Jordan</option>
+                                    <option value="KAZ" disabled>Kazakhstan</option>
+                                    <option value="KEN" disabled>Kenya</option>
+                                    <option value="KWT" disabled>Kuwait</option>
+                                    <option value="KGZ" disabled>Kyrgyzstan</option>
+                                    <option value="LAO" disabled>Laos</option>
+                                    <option value="LVA" disabled>Latvia</option>
+                                    <option value="LBN" disabled>Lebanon</option>
+                                    <option value="LBR" disabled>Liberia</option>
+                                    <option value="LTU" disabled>Lithuania</option>
+                                    <option value="LUX" disabled>Luxembourg</option>
+                                    <option value="MAC" disabled>Macau</option>
+                                    <option value="MKD" disabled>Macedonia</option>
+                                    <option value="MDG" disabled>Madagascar</option>
+                                    <option value="MWI" disabled>Malawi</option>
+                                    <option value="MYS" disabled>Malaysia</option>
+                                    <option value="MLI" disabled>Mali</option>
+                                    <option value="MLT" disabled>Malta</option>
+                                    <option value="MRT" disabled>Mauritania</option>
+                                    <option value="MUS" disabled>Mauritius</option>
+                                    <option value="MEX" disabled>Mexico</option>
+                                    <option value="FSM" disabled>Micronesia</option>
+                                    <option value="MDA" disabled>Moldova</option>
+                                    <option value="MNG" disabled>Mongolia</option>
+                                    <option value="MSR" disabled>Montserrat</option>
+                                    <option value="MOZ" disabled>Mozambique</option>
+                                    <option value="NAM" disabled>Namibia</option>
+                                    <option value="NPL" disabled>Nepal</option>
+                                    <option value="NLD" disabled>Netherlands</option>
+                                    <option value="NZL" disabled>New Zealand</option>
+                                    <option value="NIC" disabled>Nicaragua</option>
+                                    <option value="NER" disabled>Niger</option>
+                                    <option value="NGA" disabled>Nigeria</option>
+                                    <option value="NOR" selected>Norway</option>
+                                    <option value="OMN" disabled>Oman</option>
+                                    <option value="PAK" disabled>Pakistan</option>
+                                    <option value="PLW" disabled>Palau</option>
+                                    <option value="PAN" disabled>Panama</option>
+                                    <option value="PNG" disabled>Papua New Guinea</option>
+                                    <option value="PRY" disabled>Paraguay</option>
+                                    <option value="PER" disabled>Peru</option>
+                                    <option value="PHL" disabled>Philippines</option>
+                                    <option value="POL" disabled>Poland</option>
+                                    <option value="PRT" disabled>Portugal</option>
+                                    <option value="QAT" disabled>Qatar</option>
+                                    <option value="COG" disabled>Republic of the Congo</option>
+                                    <option value="ROU" disabled>Romania</option>
+                                    <option value="RUS" disabled>Russia</option>
+                                    <option value="KNA" disabled>Saint Kitts And Nevis</option>
+                                    <option value="LCA" disabled>Saint Lucia</option>
+                                    <option value="VCT" disabled>Saint Vincent and the Grenadines</option>
+                                    <option value="STP" disabled>Sao Tome And Principe</option>
+                                    <option value="SAU" disabled>Saudi Arabia</option>
+                                    <option value="SEN" disabled>Senegal</option>
+                                    <option value="SYC" disabled>Seychelles</option>
+                                    <option value="SLE" disabled>Sierra Leone</option>
+                                    <option value="SGP" disabled>Singapore</option>
+                                    <option value="SVK" disabled>Slovakia</option>
+                                    <option value="SVN" disabled>Slovenia</option>
+                                    <option value="SLB" disabled>Solomon Islands</option>
+                                    <option value="ZAF" disabled>South Africa</option>
+                                    <option value="KOR" disabled>South Korea</option>
+                                    <option value="ESP" disabled>Spain</option>
+                                    <option value="LKA" disabled>Sri Lanka</option>
+                                    <option value="SUR" disabled>Suriname</option>
+                                    <option value="SWZ" disabled>Swaziland</option>
+                                    <option value="SWE" disabled>Sweden</option>
+                                    <option value="CHE" disabled>Switzerland</option>
+                                    <option value="TWN" disabled>Taiwan</option>
+                                    <option value="TJK" disabled>Tajikistan</option>
+                                    <option value="TZA" disabled>Tanzania</option>
+                                    <option value="THA" disabled>Thailand</option>
+                                    <option value="TTO" disabled>Trinidad and Tobago</option>
+                                    <option value="TUN" disabled>Tunisia</option>
+                                    <option value="TUR" disabled>Turkey</option>
+                                    <option value="TKM" disabled>Turkmenistan</option>
+                                    <option value="TCA" disabled>Turks and Caicos Islands</option>
+                                    <option value="UGA" disabled>Uganda</option>
+                                    <option value="UKR" disabled>Ukraine</option>
+                                    <option value="ARE" disabled>United Arab Emirates</option>
+                                    <option value="GBR" disabled>United Kingdom</option>
+                                    <option value="USA" disabled>United States</option>
+                                    <option value="URY" disabled>Uruguay</option>
+                                    <option value="UZB" disabled>Uzbekistan</option>
+                                    <option value="VEN" disabled>Venezuela</option>
+                                    <option value="VNM" disabled>Vietnam</option>
+                                    <option value="YEM" disabled>Yemen</option>
+                                    <option value="ZWE" disabled>Zimbabwe</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 街道, 邮编, 电话号 -->
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label for="city" class="control-label">City</label>
+
+                                <input type="text" class="form-control" id="city" placeholder="City">
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label for="postal-code" class="control-label">Postal Code</label>
+
+                                <input type="number" class="form-control" id="postal-code" placeholder="Postal Code">
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label for="phone-number" class="control-label">Phone Number</label>
+
+                                <input type="number" class="form-control" id="phone-number" placeholder="Phone Number">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 街道地址 -->
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="street" class="control-label">Street Address</label>
+
+                                <input type="text" class="form-control" id="street" placeholder="Street address">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" id="modal-info-save">Save changes</button>
+                    <button type="button" class="btn btn-success" id="modal-info-submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modal-delete-title"></h4>
+                </div>
+
+                <div class="modal-body">
+                    Confirm Deletions?
+                    <br>
+                    <br>
+                    Warning:
+                    <br>
+                    Once you delete a profile, there is no going back. Please be certain.
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="modal-delete-delete">DELETE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+    <script src="../js/resizeable.js"></script>
+    <script src="../js/joinable.js"></script>
+    <script src="../js/xenon-custom.js"></script>
+    <script src="../js/xenon-api.js"></script>
+    <script src="../js/xenon-toggles.js"></script>
+    <script src="../js/datatables/js/jquery.dataTables.js"></script>
+    <script src="../js/datatables/dataTables.bootstrap.js"></script>
+    <script src="../js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+    <script src="../js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+
+    <script src="../js/config.js"></script>
+
+</body>
+
+</html>
