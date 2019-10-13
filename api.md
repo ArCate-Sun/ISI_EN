@@ -1,3 +1,8 @@
+
+原网站: http://39.105.31.182:8007/english/
+后台: http://39.105.31.182:8007/english/siteserver/login.aspx
+admin nk_123456
+
 # 前台
 
 1. /list/categories

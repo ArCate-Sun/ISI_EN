@@ -1,0 +1,145 @@
+
+<!-- Custom column filtering -->
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title" style="line-height:47px;">新闻列表</h3>
+		<div class="panel-options">
+			<button class="btn btn-secondary btn-icon btn-icon-standalone" id="open-modal-new">
+				<i class="fa-plus"></i><span>添加新闻</span>
+			</button>
+		</div>
+	</div>
+	<div class="panel-body">
+
+		<table id="news-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>标题</th>
+				<th>剩余高亮时间</th>
+				<th>最后修改时间</th>
+				<th style="width: 300px;">操作</th>
+			</tr>
+			</thead>
+
+			<tfoot>
+			<tr>
+				<th>ID</th>
+				<th>标题</th>
+				<th>剩余高亮时间</th>
+				<th>最后修改时间</th>
+				<th>操作</th>
+			</tr>
+			</tfoot>
+
+			<tbody id="news-table-tbody">
+				<tr>
+					<td>101</td>
+					<td>TITLE</td>
+					<td>123</td>
+					<td>2019-10-10</td>
+					<td>
+						<a href="#" name="${user.id}" class="btn btn-info btn-sm btn-icon open-modal-info">查看</a>
+						<a href="#" name="${user.id}" class="btn btn-secondary btn-sm btn-icon open-modal-edit">编辑</a>
+						<a href="#" name="${user.id}" class="btn btn-danger btn-sm btn-icon open-modal-delete">置顶</a>
+						<a href="#" name="${user.id}" class="btn btn-danger btn-sm btn-icon open-modal-delete">发布</a>
+						<a href="#" name="${user.id}" class="btn btn-danger btn-sm btn-icon open-modal-delete">删除</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css">
+
+<script src="assets/js/datatables/js/jquery.dataTables.js"></script>
+<script src="assets/js/datatables/dataTables.bootstrap.js"></script>
+<script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+
+<script src="assets/js/format_print.js"></script>
+
+<script>
+	
+	function init_news_list(news) {
+
+		let table = $("#news-table");
+		let tbody = table.find("tbody");
+		tbody.empty();
+		for (let i = 0; i < news.length; i++) {
+			let item = news[i];
+			tbody.append(`
+				<tr>
+					<td>${item.id}</td>
+					<td>${item.title}</td>
+					<td>${item.highlight_time}</td>
+					<td>${timestamp_to_string(item.time)}</td>
+					<td>
+						<a href="#/news/edit" name="${item.id}" class="btn btn-info btn-sm btn-icon open-modal-info">查看</a>
+						<a href="#" name="${item.id}" class="btn btn-secondary btn-sm btn-icon open-modal-edit">编辑</a>
+						<a href="#" name="${item.id}" class="btn btn-danger btn-sm btn-icon open-modal-delete">置顶</a>
+						<a href="#" name="${item.id}" class="btn btn-danger btn-sm btn-icon open-modal-delete">发布</a>
+						<a href="#" name="${item.id}" class="btn btn-danger btn-sm btn-icon open-modal-delete">删除</a>
+					</td>
+				</tr>
+        	`);
+		}
+	}
+
+	function init_news_list_table() {
+
+		let table = $("#news-table");
+		table.dataTable({
+			aLengthMenu: [
+				[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+			],
+			ordering: false,
+		});
+
+	}
+
+	
+	(function () {
+		let page_data = {
+			news: [
+				{
+					id: 101,
+					title: "Department of Electrical Science and Engineering",
+					highlight_time: 10,
+					time: 1569411840964
+				},
+				{
+					id: 102,
+					title: "Teaching Center for Experimental Electronic Information",
+					highlight_time: 13,
+					time: 1569411840964
+				},
+				{
+					id: 103,
+					title: "Teaching Center for Experimental Electronic Information",
+					highlight_time: 15,
+					time: 1569411840964
+				},
+				{
+					id: 104,
+					title: "Teaching Center for Experimental Electronic Information",
+					highlight_time: 3,
+					time: 1569411840964
+				},
+				{
+					id: 105,
+					title: "Department of Optoelectronic Science and Technology",
+					highlight_time: 11,
+					time: 1569411840964
+				},
+			]
+		};
+		init_news_list(page_data.news);
+		init_news_list_table();
+	})()
+	
+	
+
+</script>

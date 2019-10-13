@@ -1,10 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="Xenon Boostrap Admin Panel"/>
+	<meta name="author" content=""/>
+
+	<title>Xenon - Layouts</title>
+
+	<link rel="stylesheet" href="./assets/css/fonts/arimo/css/arimo.css">
+	<link rel="stylesheet" href="./assets/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="./assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./assets/css/bootstrap.css">
+	<link rel="stylesheet" href="./assets/css/xenon-core.css">
+	<link rel="stylesheet" href="./assets/css/xenon-forms.css">
+	<link rel="stylesheet" href="./assets/css/xenon-components.css">
+	<link rel="stylesheet" href="./assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="./assets/css/custom.css">
+
+	<script src="./assets/js/jquery-1.11.1.min.js"></script>
+
+	<script src="./assets/js/router.js"></script>
+
+	<style>
+		.dropdown-menu > li > a > i {
+			display: inline-block;
+			margin-right: 5px;
+			width: 10px;
+			text-align: center;
+		}
+
+	</style>
+
 </head>
-<body>
+<body class="page-body">
+
+<div class="page-container">
+	<!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+	<!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
+	<!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
+	<!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
+	<div class="sidebar-menu toggle-others fixed">
+
+		<div class="sidebar-menu-inner">
+
+			<header class="logo-env">
+
+				<!-- logo -->
+				<div class="logo">
+					<a href="dashboard-1.html" class="logo-expanded">
+						<img src="assets/images/logo@2x.png" width="80" alt=""/>
+					</a>
+
+					<a href="dashboard-1.html" class="logo-collapsed">
+						<img src="assets/images/logo-collapsed@2x.png" width="40" alt=""/>
+					</a>
+				</div>
+
+				<!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+				<div class="mobile-menu-toggle visible-xs">
+					<a href="#" data-toggle="user-info-menu">
+						<i class="fa-bell-o"></i>
+						<span class="badge badge-success">7</span>
+					</a>
+
+					<a href="#" data-toggle="mobile-menu">
+						<i class="fa-bars"></i>
+					</a>
+				</div>
+
+			</header>
+
+
+			<ul id="main-menu" class="main-menu">
+				<!-- add class "multiple-expanded" to allow multiple submenus to open -->
+				<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+			</ul>
+
+		</div>
+
+	</div>
+
+	<div class="main-content">
+
+		<nav class="navbar user-info-navbar" role="navigation"><!-- User Info, Notifications and Menu Bar -->
+
+			<!-- Right links for user info navbar -->
+			<ul class="user-info-menu right-links list-inline list-unstyled">
+				<li class="search-form"><!-- You can add "always-visible" to show make the search input visible -->
+
+					<form name="userinfo_search_form" method="get" action="extra-search.html">
+						<input type="text" name="s" class="form-control search-field" placeholder="输入关键字以查找..."/>
+
+						<button type="submit" class="btn btn-link">
+							<i class="linecons-search"></i>
+						</button>
+					</form>
+
+				</li>
+
+				<li class="dropdown user-profile">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32"
+							 width="28"/>
+						<span>
+							ACat
+							<i class="fa-angle-down"></i>
+						</span>
+					</a>
+
+					<ul class="dropdown-menu user-profile-menu list-unstyled">
+						<li>
+							<a href="#/profile/edit">
+								<i class="fa-wrench"></i>
+								账户设置
+							</a>
+						</li>
+						<li class="last">
+							<a href="login.html">
+								<i class="fa-lock"></i>
+								登出
+							</a>
+						</li>
+					</ul>
+				</li>
+
+			</ul>
+
+		</nav>
+
+		<div class="page-title" id="page-title">
+
+			<div class="title-env">
+				<h1 class="title"></h1>
+			</div>
+
+		</div>
+
+		<div id="content-placeholder"></div>
+
+
+		<!-- Main Footer -->
+		<!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
+		<!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
+		<!-- Or class "fixed" to  always fix the footer to the end of page -->
+		<footer class="main-footer sticky footer-type-1">
+
+			<div class="footer-inner">
+
+				<!-- Add your copyright text here -->
+				<div class="footer-text">
+					&copy; 2019
+					<strong>南开大学电光网站信息管理系统</strong>
+					由 <a>南开大学嵌入式系统与信息安全实验室</a> 开发
+				</div>
+
+
+				<!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
+				<div class="go-up">
+
+					<a href="#" rel="go-top">
+						<i class="fa-angle-up"></i>
+					</a>
+
+				</div>
+
+			</div>
+
+		</footer>
+	</div>
+
+</div>
+
+
+<script>
+	let page_data = {
+		menu: [
+			{
+				title: "首页轮播图片",
+				i: "linecons-cog",
+				url: "#/home_pics/edit"
+			}, {
+				title: "Introduction",
+				i: "linecons-cog",
+				children: [
+					{
+						title: "College of Electronic Information and Optical Engineering",
+						url: "#/category/11",
+					}, {
+						title: "Institute of Modern Optics",
+						url: "#/category/12",
+					}, {
+						title: "Department of Optoelectronic Science and Technology",
+						url: "#/category/13",
+					}, {
+						title: "Department of Electronic Information Science and Technology",
+						id: 14,
+					}, {
+						title: "Institute of Photoelectronic Thin Film Devices and Technology",
+						id: 15,
+					}, {
+						title: "Department of Microelectronic Engineering",
+						id: 16,
+					}, {
+						title: "Department of Communication Engineering",
+						id: 17,
+					}, {
+						title: "Teaching Center for Experimental Electronic Information",
+						id: 18,
+					}, {
+						title: "Department of Electrical Science and Engineering",
+						id: 19,
+					},
+				]
+			}, {
+				title: "Education",
+				i: "linecons-desktop",
+				children: [
+					{
+						title: "Education",
+						id: 21,
+					},
+				]
+			}, {
+				title: "News",
+				i: "linecons-desktop",
+				children: [
+					{
+						title: "College dynamics",
+						id: 31,
+					}, {
+						title: "Key news",
+						id: 32,
+					}, {
+						title: "Teaching recruit students",
+						id: 33,
+					},
+				]
+			}, {
+				title: "Notification",
+				i: "linecons-desktop",
+				children: [
+					{
+						title: "Notification",
+						id: 41,
+					},
+				]
+			},
+		]
+	};
+
+	/**
+	 * 初始化菜单列表
+	 * @param menu
+	 * @param active_id
+	 * @param parent
+	 */
+	function init_menu(menu, active_id, parent) {
+
+		parent = parent || $("#main-menu");
+		let find_active = false;
+
+		for (let i = 0; i < menu.length; i++) {
+			let item = menu[i];
+			let item_script = `<li><a href="${item.url || ""}"><i class="${item.i}"></i><span class="title">${item.title}</span></a><ul></ul></li>`;
+			let item_node = $(item_script);
+
+			if (!item.i) {
+				item_node.find("i").remove();
+			}
+
+			if (item.id === active_id) {
+				item_node.addClass("active");
+				init_page_title(item.title);
+				find_active = true;
+			}
+
+			if (item.children) {
+				find_active = init_menu(item.children, active_id, item_node.find("ul"));
+				if (find_active) {
+					item_node.addClass("opened active");
+				}
+			} else {
+				item_node.find("ul").remove();
+			}
+
+			parent.append(item_node);
+		}
+
+		return find_active;
+	}
+
+	/**
+	 * 初始化页面标题
+	 * @param title
+	 */
+	function init_page_title(title) {
+		let page_title = $("#page-title");
+		page_title.find("h1").text(title);
+	}
+
+	init_menu(page_data.menu, 11);
+
+	// Router.route('/category/11', function () {
+	// 	$.ajax({
+	// 		url: "news_list.tpl.html",
+	// 		success: function (response, status, xhr) {
+	// 			let content_div = $("#content-placeholder");
+	// 			content_div.children().remove();
+	// 			content_div.append($(response));
+	//
+	// 		},
+	// 		error: function (xhr, msg, error) {}
+	// 	})
+	// })
+	Router.route('/home_pics/edit', "edit_home_pics.tpl.html");
+	Router.route('/category/11', "news_list.tpl.html");
+	Router.route('/news/edit', "edit_news.tpl.html");
+	Router.route('/profile/edit', "edit_profile.tpl.html");
+	Router.route('/category/13', "test.html");
+	Router.route('/category/14', "test.html");
+	Router.route('/category/15', "test.html");
+
+
+</script>
+
+
+<!-- Bottom Scripts -->
+<script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/TweenMax.min.js"></script>
+<script src="./assets/js/resizeable.js"></script>
+<script src="./assets/js/joinable.js"></script>
+<script src="./assets/js/xenon-api.js"></script>
+<script src="./assets/js/xenon-toggles.js"></script>
+
+
+<!-- JavaScripts initializations and stuff -->
+<script src="assets/js/xenon-custom.js"></script>
 
 </body>
 </html>
