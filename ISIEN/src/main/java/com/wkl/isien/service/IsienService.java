@@ -123,6 +123,7 @@ public class IsienService {
 	public void deleteNews(long id){
 		nr.deleteById(id);
 	}
+
 	//撤下新闻，更新新闻状态
 	public void withdrawNews(long id){
 		News news=nr.findById(id).orElse(null);

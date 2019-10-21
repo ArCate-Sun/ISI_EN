@@ -186,7 +186,19 @@
 <script src="assets/js/render.js"></script>
 <script>
 
+
+
 	function init_page(page_data) {
+		$.ajax({
+			url: "localhost:8080/server/category/list",
+			success: function (response, status, xhr) {
+				console.log(response)
+				response = JSON.stringify(response);
+				console.log(response);
+			},
+		})
+
+
 		init_title(page_data.title);
 		init_base_link(page_data);
 		init_navbar(page_data.categories);
